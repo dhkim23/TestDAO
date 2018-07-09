@@ -1,0 +1,11 @@
+apply plugin: 'application'
+apply plugin: 'java'
+mainClassName ="kr.co.mdrp.dao.Main"
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'org.greenrobot:greendao-gradle-plugin:3.2.2' // 추가
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
