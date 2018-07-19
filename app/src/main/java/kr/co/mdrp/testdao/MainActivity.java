@@ -1,6 +1,7 @@
 package kr.co.mdrp.testdao;
 
 import android.Manifest;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
@@ -72,29 +73,6 @@ public class MainActivity extends AppCompatActivity {
         DaoSession daoSession1 = appController.getDaoSession();
 
 
-        //PERMISSION
-//        PermissionListener permissionlistener = new PermissionListener() {
-//            @Override
-//            public void onPermissionGranted() {
-//                Toast.makeText(MainActivity.this, "권한 허가", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
-//                Toast.makeText(MainActivity.this, "권한 거부\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
-//            }
-//
-//
-//        };
-//
-//        TedPermission.with(this)
-//                .setPermissionListener(permissionlistener)
-//                .setRationaleMessage("구글 로그인을 하기 위해서는 주소록 접근 권한이 필요해요")
-//                .setDeniedMessage("왜 거부하셨어요...\n하지만 [설정] > [권한] 에서 권한을 허용할 수 있어요.")
-//                .setPermissions(Manifest.permission.INTERNET)
-//                .check();
-
-
         checkTedPermission();
 
 
@@ -121,6 +99,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    //onClick
+    public void btnStart(View view){
+        startService(new Intent(MainActivity.this, AlwaysOnTopService.class));
+
     }
     // [퍼미션 체크] ==================================================================================
     private void checkTedPermission() {
@@ -152,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPermissionListener(permissionlistener)
                 .setRationaleMessage("SD Write Read 권한이 필요해요")
                 .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
-                .setPermissions(Manifest.permission.INTERNET)
+                .setPermissions(Manifest.permission.SYSTEM_ALERT_WINDOW)
                 .check();
     }
     static class HttpPingAsyncTask extends AsyncTask<String, Void, Boolean> {
