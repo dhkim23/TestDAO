@@ -109,11 +109,18 @@ public class AlwaysOnTopService extends Service implements View.OnTouchListener,
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if(wm!=null){
+
+        }
+        if(topLeftView!=null){
+            wm.removeView(topLeftView);
+            topLeftView = null;
+        }
+
         if (overlayedButton != null) {
             wm.removeView(overlayedButton);
-            wm.removeView(topLeftView);
             overlayedButton = null;
-            topLeftView = null;
+
         }
     }
 
