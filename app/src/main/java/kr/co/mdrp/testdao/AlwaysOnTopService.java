@@ -43,12 +43,13 @@ public class AlwaysOnTopService extends Service implements View.OnTouchListener,
         return null;
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+
     @Override
     public void onCreate() {
         super.onCreate();
 
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater;
+        inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         overlayedButton = inflater.inflate(R.layout.always_top,null);
         mEtAlways = overlayedButton.findViewById(R.id.etAlways);
 
@@ -68,15 +69,16 @@ public class AlwaysOnTopService extends Service implements View.OnTouchListener,
         overlayedButton.setOnClickListener(this);
 
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
-                WindowManager.LayoutParams.MATCH_PARENT,
+                /*WindowManager.LayoutParams.MATCH_PARENT*/300,
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.TYPE_PHONE,
 
-                WindowManager.LayoutParams.FLAG_BLUR_BEHIND | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL, PixelFormat.TRANSLUCENT);
-        params.gravity = Gravity.LEFT | Gravity.TOP;
+                 WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL, PixelFormat.TRANSLUCENT);
+        params.gravity = Gravity.START | Gravity.TOP;
         params.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
         params.x = 0;
         params.y = 0;
+
 
 
         wm.addView(overlayedButton, params);
@@ -85,7 +87,7 @@ public class AlwaysOnTopService extends Service implements View.OnTouchListener,
 
         topLeftView = new View(this);
         WindowManager.LayoutParams topLeftParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.TYPE_SYSTEM_ALERT, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL, PixelFormat.TRANSLUCENT);
-        topLeftParams.gravity = Gravity.LEFT | Gravity.TOP;
+        topLeftParams.gravity = Gravity.START | Gravity.TOP;
         topLeftParams.x = 0;
         topLeftParams.y = 0;
         topLeftParams.width = 0;
@@ -135,7 +137,7 @@ public class AlwaysOnTopService extends Service implements View.OnTouchListener,
 
         } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
             int[] topLeftLocationOnScreen = new int[2];
-            //topLeftView.getLocationOnScreen(topLeftLocationOnScreen);
+            topLeftView.getLocationOnScreen(topLeftLocationOnScreen);
 
             System.out.println("topLeftY="+topLeftLocationOnScreen[1]);
             System.out.println("originalY="+originalYPos);
