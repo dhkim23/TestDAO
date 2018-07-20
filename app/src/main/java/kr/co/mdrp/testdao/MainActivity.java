@@ -109,6 +109,10 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, CardListActivity.class);
             startActivity(intent);
 
+        }else if(view.getId() == R.id.btnStart3){
+            Intent intent = new Intent(this, CardListActivity.class);
+            stopService(intent);
+
         }
 
 

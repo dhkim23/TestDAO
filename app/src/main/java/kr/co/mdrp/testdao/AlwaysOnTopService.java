@@ -24,8 +24,7 @@ public class AlwaysOnTopService extends Service implements View.OnTouchListener,
     private View topLeftView;
     //private Button overlayedButton;
     View overlayedButton ;
-    EditText mEtAlways;
-    Button mBStart, mBCall;
+    Button mBStart;
     private double mLat, mLng;
 
     //for notification
@@ -51,13 +50,9 @@ public class AlwaysOnTopService extends Service implements View.OnTouchListener,
         LayoutInflater inflater;
         inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         overlayedButton = inflater.inflate(R.layout.always_top,null);
-        mEtAlways = overlayedButton.findViewById(R.id.etAlways);
 
         mBStart = overlayedButton.findViewById(R.id.btnStart);
         mBStart.setOnClickListener(this);
-
-        mBCall = overlayedButton.findViewById(R.id.btnCall);
-        mBCall.setOnClickListener(this);
 
         wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
 
@@ -175,19 +170,12 @@ public class AlwaysOnTopService extends Service implements View.OnTouchListener,
 
     @Override
     public void onClick(View v) {
-        mEtAlways.requestFocus();
-        if(mEtAlways.getVisibility() == View.VISIBLE){
-            mEtAlways.setVisibility(View.GONE);
-        }else{
-            mEtAlways.setVisibility(View.VISIBLE);
-        }
+
         if(v.getId() == R.id.btnStart){
             Toast.makeText(this, "Service Stop", Toast.LENGTH_SHORT).show();
-            getApplication().getApplicationContext().stopService()
+
             //mService.myServiceFunc();
 
-        }else if(v.getId() == R.id.btnCall) {
-            Toast.makeText(this, "Service Call ", Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(this, "Overlay mBStart click event", Toast.LENGTH_SHORT).show();
         }
