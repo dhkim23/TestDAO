@@ -33,6 +33,7 @@ import kr.co.mdrp.testdao.dao.DaoMaster;
 import kr.co.mdrp.testdao.dao.DaoSession;
 import kr.co.mdrp.testdao.dao.Person;
 import kr.co.mdrp.testdao.dao.PersonDao;
+import kr.co.mdrp.testdao.sub.CardListActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -102,7 +103,14 @@ public class MainActivity extends AppCompatActivity {
     }
     //onClick
     public void btnStart(View view){
-        startService(new Intent(MainActivity.this, AlwaysOnTopService.class));
+        if( view.getId() == R.id.btnStart1){
+            startService(new Intent(MainActivity.this, AlwaysOnTopService.class));
+        }else if(view.getId() == R.id.btnStart2){
+            Intent intent = new Intent(this, CardListActivity.class);
+            startActivity(intent);
+
+        }
+
 
     }
     // [퍼미션 체크] ==================================================================================

@@ -182,7 +182,8 @@ public class AlwaysOnTopService extends Service implements View.OnTouchListener,
             mEtAlways.setVisibility(View.VISIBLE);
         }
         if(v.getId() == R.id.btnStart){
-            Toast.makeText(this, "Service Start", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Service Stop", Toast.LENGTH_SHORT).show();
+            getApplication().getApplicationContext().stopService()
             //mService.myServiceFunc();
 
         }else if(v.getId() == R.id.btnCall) {

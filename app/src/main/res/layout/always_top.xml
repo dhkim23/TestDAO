@@ -5,35 +5,17 @@
 	android:layout_height="wrap_content"
 	android:gravity="center"
 	android:background="#33000000">
-
-
-
-		<EditText
-			android:id="@+id/etAlways"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="#ffffff"
-			android:gravity="top"
-			android:textColor="#000000"
-			android:hint="내용을 입력하세요"
-			android:maxLines="10"
-			android:minLines="10"
-			android:layout_margin="20dp"
-			android:padding="10dp"
-			android:text="" />
-
-
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:id="@+id/tvSample"
+		android:text="sample text"/>
 
 	<Button
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
 			android:id="@+id/btnStart"
-			android:text="Start"/>
+			android:text="Stop"/>
 
-	<Button
-			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:id="@+id/btnCall"
-		android:visibility="gone"
-			android:text="Call"/>
+
 </LinearLayout>
