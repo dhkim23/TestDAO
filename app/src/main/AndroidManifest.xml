@@ -38,6 +38,11 @@
             android:enabled="true"
             android:permission="android.permission.SYSTEM_ALERT_WINDOW" >
         </service>
+        <service
+            android:name=".AlwaysTopServiceTouch"
+            android:enabled="true"
+            android:permission="android.permission.SYSTEM_ALERT_WINDOW" >
+        </service>
     </application>
 
 

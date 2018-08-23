@@ -104,13 +104,13 @@ public class MainActivity extends AppCompatActivity {
     //onClick
     public void btnStart(View view){
         if( view.getId() == R.id.btnStart1){
-            startService(new Intent(MainActivity.this, AlwaysOnTopService.class));
+            startService(new Intent(MainActivity.this, /*AlwaysTopServiceTouch.class*/AlwaysOnTopService.class));
         }else if(view.getId() == R.id.btnStart2){
             Intent intent = new Intent(this, CardListActivity.class);
             startActivity(intent);
 
         }else if(view.getId() == R.id.btnStart3){
-            Intent intent = new Intent(this, AlwaysOnTopService.class);
+            Intent intent = new Intent(this, /*AlwaysTopServiceTouch.class*/AlwaysOnTopService.class);
             stopService(intent);
 
         }

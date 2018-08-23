@@ -21,7 +21,7 @@ import android.widget.Toast;
  * Created by sjkim on 2016. 8. 21..
  */
 public class AlwaysOnTopService extends Service implements View.OnTouchListener, View.OnClickListener {
-    private View topLeftView;
+    private View mView;
     //private Button overlayedButton;
     View overlayedButton ;
     Button mBStart;
@@ -68,9 +68,9 @@ public class AlwaysOnTopService extends Service implements View.OnTouchListener,
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.TYPE_PHONE,
 
-                 WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL, PixelFormat.TRANSLUCENT);
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL, PixelFormat.TRANSLUCENT);
         params.gravity = Gravity.START | Gravity.TOP;
-        params.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
+        //params.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
         params.x = 0;
         params.y = 0;
 
@@ -80,14 +80,21 @@ public class AlwaysOnTopService extends Service implements View.OnTouchListener,
 
 
 
-        topLeftView = new View(this);
-        WindowManager.LayoutParams topLeftParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.TYPE_SYSTEM_ALERT, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL, PixelFormat.TRANSLUCENT);
+        mView = new View(this);
+        WindowManager.LayoutParams topLeftParams =
+                new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT,
+                        WindowManager.LayoutParams.WRAP_CONTENT,
+                        WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
+                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                                |WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+                                |WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
+                        PixelFormat.TRANSLUCENT);
         topLeftParams.gravity = Gravity.START | Gravity.TOP;
         topLeftParams.x = 0;
         topLeftParams.y = 0;
         topLeftParams.width = 0;
         topLeftParams.height = 0;
-        wm.addView(topLeftView, topLeftParams);
+        wm.addView(mView, topLeftParams);
 
 
 
@@ -107,9 +114,9 @@ public class AlwaysOnTopService extends Service implements View.OnTouchListener,
         if(wm!=null){
 
         }
-        if(topLeftView!=null){
-            wm.removeView(topLeftView);
-            topLeftView = null;
+        if(mView!=null){
+            wm.removeView(mView);
+            mView = null;
         }
 
         if (overlayedButton != null) {
@@ -139,7 +146,7 @@ public class AlwaysOnTopService extends Service implements View.OnTouchListener,
 
         } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
             int[] topLeftLocationOnScreen = new int[2];
-            topLeftView.getLocationOnScreen(topLeftLocationOnScreen);
+            mView.getLocationOnScreen(topLeftLocationOnScreen);
 
             System.out.println("topLeftY="+topLeftLocationOnScreen[1]);
             System.out.println("originalY="+originalYPos);
